@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --font-42dot: "42dot Sans", sans-serif;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
