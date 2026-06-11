@@ -19,10 +19,21 @@ function App() {
       .then((data) => {
         setNotes(data);
         notesCopyRef.current = data;
+        setCurrentId(Math.max(...data.map((n) => n.id)) + 1);
       });
   }
+
+  function fetchDeleteList() {
+    fetch("http://localhost:8000/api/deleteList")
+      .then((res) => res.json())
+      .then((data) => {
+        setDeleteNoteList(data);
+      });
+  }
+
   useEffect(() => {
     fetchNotes();
+    fetchDeleteList();
   }, []);
 
   return (

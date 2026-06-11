@@ -80,7 +80,6 @@ function Note({
                   setCurrentId((id) => id + 1);
                 }
                 closeNote();
-                console.log("it was done");
                 notesCopyRef.current = [
                   ...notes,
                   { id: currentId, title: titleText, text: noteText },

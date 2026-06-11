@@ -23,6 +23,13 @@ const server = http.createServer((req, res) => {
     });
 
     res.end(data);
+  } else if (pathname === "/api/deleteList" && req.method === "GET") {
+    const data = fs.readFileSync("./data/delete-id.json", "utf-8");
+
+    res.writeHead(200, {
+      "Content-Type": "application/json",
+    });
+    res.end(data);
   } else if (pathname === "/add-note" && req.method === "POST") {
     let body = "";
 
@@ -44,12 +51,7 @@ const server = http.createServer((req, res) => {
         "Content-Type": "application/json",
       });
 
-      res.end(
-        JSON.stringify({
-          success: true,
-          notes: updatedNotes,
-        }),
-      );
+      res.end("Success");
     });
   } else if (pathname === "/edit-note" && req.method === "POST") {
     let body = "";
@@ -76,12 +78,33 @@ const server = http.createServer((req, res) => {
         "Content-Type": "application/json",
       });
 
-      res.end(
-        JSON.stringify({
-          success: true,
-          notes: updatedNotes,
-        }),
+      res.end("Success");
+    });
+  } else if (pathname === "/remove-note" && req.method === "POST") {
+    let body = "";
+
+    req.on("data", (chunk) => {
+      body += chunk.toString();
+    });
+
+    req.on("end", () => {
+      const id = JSON.parse(body).id;
+
+      const data = fs.readFileSync("./data/delete-id.json", "utf-8");
+      const deleteList = JSON.parse(data);
+
+      const updatedDeleteList = [...deleteList, id];
+
+      fs.writeFileSync(
+        "./data/delete-id.json",
+        JSON.stringify(updatedDeleteList, null, 2),
       );
+
+      res.writeHead(200, {
+        "Content-Type": "application/json",
+      });
+
+      res.end("Success");
     });
   } else {
     res.writeHead(404, {
@@ -95,33 +118,3 @@ const server = http.createServer((req, res) => {
 server.listen(8000, "127.0.0.1", () => {
   console.log("Listening on port 8000");
 });
-
-// else if (pathname === "/remove-note" && req.method === "POST") {
-//     let body = "";
-
-//     req.on("data", (chunk) => {
-//       body += chunk.toString();
-//     });
-
-//     req.on("end", () => {
-//       const id = JSON.parse(body).id;
-
-//       const data = fs.readFileSync(FILE, "utf-8");
-//       const notes = JSON.parse(data);
-
-//       const updatedNotes = notes.filter((note) => note.id !== id);
-
-//       fs.writeFileSync(FILE, JSON.stringify(updatedNotes, null, 2));
-
-//       res.writeHead(200, {
-//         "Content-Type": "application/json",
-//       });
-
-//       res.end(
-//         JSON.stringify({
-//           success: true,
-//           notes: updatedNotes,
-//         }),
-//       );
-//     });
-//   }

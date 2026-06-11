@@ -18,6 +18,11 @@ function NoteCard({
 
   function deleteNoteFunc() {
     setDeleteNoteList([...deleteNoteList, id]);
+    fetch("http://localhost:8000/remove-note", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: id }),
+    });
   }
 
   const [isHover, setIsHover] = useState(false);
