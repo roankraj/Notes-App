@@ -16,6 +16,7 @@ Create, edit, search, and delete notes — with data stored locally in a JSON fi
 - **React** – UI components and state management
 - **Vite** – Build tool and dev server
 - **Tailwind CSS** – Utility-first styling
+- **Framer Motion** – Animated note open/close transitions
 - **Node.js HTTP Server** (no framework) – Serves and persists notes data as JSON
 
 ## 🚀 Getting Started
