@@ -19,7 +19,8 @@ function App() {
       .then((data) => {
         setNotes(data);
         notesCopyRef.current = data;
-        setCurrentId(Math.max(...data.map((n) => n.id)) + 1);
+        const nextId = data.length ? Math.max(...data.map((n) => n.id)) + 1 : 0;
+        setCurrentId(nextId);
       });
   }
 
@@ -37,12 +38,7 @@ function App() {
   }, []);
 
   return (
-    <div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="font-42dot bg-[#1e1e1e]"
-    >
+    <div className="font-42dot bg-[#1e1e1e]">
       <Header
         setOpen={setOpen}
         setIsInput={setIsInput}

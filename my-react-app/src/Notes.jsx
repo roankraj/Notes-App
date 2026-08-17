@@ -12,7 +12,7 @@ function Notes({
   if (!notes) return <h1>Loading...</h1>;
 
   return (
-    <div
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -59,7 +59,7 @@ function Notes({
             })}
         </AnimatePresence>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
