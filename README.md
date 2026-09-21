@@ -2,7 +2,7 @@
 
 Create, edit, search, and delete notes — with data stored locally in a JSON file.
 
-![Demo](my-react-app/src/assets/demo.gif)
+<img src="./my-react-app/src/assets/demo.gif" width="600">
 
 ## ✨ Features
 
